@@ -17,3 +17,7 @@ this project is a wheater watcher that uses raspberry pi, dht-11 and hc-sr04 sen
 6. deploy an node-red serve anywhere and use the flows.json file to import some processment nodes to your archtecture
 7. create an accoount on [adafruit.io platform](https://io.adafruit.com/) and create the necessary feeds and your desired dashboard
 8. configure your node-red server to watch the correct broker, topics and to send the correct data to adafruit feeds
+
+## options
+
+- you can change the moving average subset size on the node red server to adjust the frequency of changes published on the broker, adafruit and twitter
