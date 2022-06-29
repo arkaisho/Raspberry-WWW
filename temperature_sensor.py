@@ -15,4 +15,19 @@ class TemperatureSensor:
             return temp, umid
         else:
             return False, 0
+    
+    def readAndPost(self,client):
+        temp,umid = self.readSensor()
+        
+        if(not (type(temp) == bool)):
+            client.publish("arkaisho_iot_project_temperature",temp)
+            client.publish("arkaisho_iot_project_umidity",umid)
+            print("posted temperature:",str(temp))
+            print("posted umidity:",str(umid))
+        else:
+            client.publish("arkaisho_iot_project_temperature_failure",0)
+            client.publish("arkaisho_iot_project_umidity_failure",0)
+            print("posted temperature failure")
+            print("posted umidity failure")
+            
 

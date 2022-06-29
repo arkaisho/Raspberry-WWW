@@ -26,3 +26,9 @@ class DistanceSensor:
 
         pulse_duration = pulse_end_time - pulse_start_time
         return round(pulse_duration * 17150, 2)
+    
+
+    def readAndPost(self,client):
+        distance = self.readSensor()
+        client.publish("arkaisho_iot_project_proximity",distance)
+        print("posted distance:",str(distance))
