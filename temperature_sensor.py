@@ -5,12 +5,12 @@ import time
 ##  pin 18
 
 class TemperatureSensor:
-    def __init__(self,PIN_TEMPERATURE):
-        self.PIN_TEMPERATURE = PIN_TEMPERATURE
+    def __init__(self,digital_pin):
+        self.digital_pin = digital_pin
         self.sensor = Adafruit_DHT.DHT11
         
     def readSensor(self):
-        umid, temp = Adafruit_DHT.read_retry(self.sensor, self.PIN_TEMPERATURE);
+        umid, temp = Adafruit_DHT.read_retry(self.sensor, self.digital_pin);
         if umid is not None and temp is not None:
             return temp, umid
         else:
@@ -30,4 +30,3 @@ class TemperatureSensor:
             print("posted temperature failure")
             print("posted umidity failure")
             
-

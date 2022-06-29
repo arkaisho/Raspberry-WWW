@@ -6,7 +6,6 @@ import time
 
 class DistanceSensor:
     def __init__(self,PIN_DISTANCE_TRIGGER,PIN_DISTANCE_ECHO):
-
         self.PIN_DISTANCE_TRIGGER = PIN_DISTANCE_TRIGGER
         self.PIN_DISTANCE_ECHO = PIN_DISTANCE_ECHO
 
