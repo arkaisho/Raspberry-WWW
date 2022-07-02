@@ -29,4 +29,3 @@ class TemperatureSensor:
             client.publish("arkaisho_iot_project_umidity_failure",0)
             print("posted temperature failure")
             print("posted umidity failure")
-            

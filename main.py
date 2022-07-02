@@ -10,19 +10,19 @@ try:
     
     client = BrokerClient("broker.emqx.io",1883)
     
-    distanceSensor = DistanceSensor(7,11)
-    temperatureSensor = TemperatureSensor(16)
+    distanceSensor = DistanceSensor(26,22) #trigger pin, echo pin
+    temperatureSensor = TemperatureSensor(21) 
     rainSensor = RainSensor(18)
     
     last_iteraction = time.time() - 8
     
     while True:
-        if(time.time() - last_iteraction >= 8):
+        if(time.time() - last_iteraction >= 2):
             last_iteraction = time.time()
 
             distanceSensor.readAndPost(client)
-            temperatureSensor.readAndPost(client)
-            rainSensor.readAndPost(client)
+            #temperatureSensor.readAndPost(client)
+            #rainSensor.readAndPost(client)
             
 finally:
     GPIO.cleanup()
