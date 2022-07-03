@@ -20,10 +20,18 @@ class TemperatureSensor:
         temp,umid = self.readSensor()
         
         if(not (type(temp) == bool)):
-            client.publish("arkaisho_iot_project_temperature",temp)
-            client.publish("arkaisho_iot_project_umidity",umid)
-            print("posted temperature:",str(temp))
-            print("posted umidity:",str(umid))
+            if(temp>0):
+                client.publish("arkaisho_iot_project_temperature",temp)
+                print("posted temperature:",str(temp))
+            else:
+                client.publish("arkaisho_iot_project_temperature_failure",0)
+                print("posted temperature failure")
+            if(0<umid<=100):
+                client.publish("arkaisho_iot_project_umidity",umid)
+                print("posted umidity:",str(umid))
+            else:
+                client.publish("arkaisho_iot_project_umidity_failure",0)
+                print("posted umidity failure")
         else:
             client.publish("arkaisho_iot_project_temperature_failure",0)
             client.publish("arkaisho_iot_project_umidity_failure",0)
