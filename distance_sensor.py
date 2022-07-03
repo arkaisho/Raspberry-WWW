@@ -40,3 +40,4 @@ class DistanceSensor:
         else:
             client.publish("arkaisho_iot_project_proximity_failure",0)
             print("posted distance failure")
+            

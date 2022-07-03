@@ -21,7 +21,7 @@ class BrokerClient:
         
     def publish(self,topic,data):
         self.client.publish(topic,data)
-        
+    
     def subscribe(self,topic):
         self.client.subscribe(topic)
         
