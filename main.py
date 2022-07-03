@@ -17,7 +17,7 @@ try:
     last_iteraction = time.time() - 8
     
     while True:
-        if(time.time() - last_iteraction >= 0.3):
+        if(time.time() - last_iteraction >= 8):
             last_iteraction = time.time()
 
             distanceSensor.readAndPost(client)
