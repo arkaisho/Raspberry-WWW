@@ -4,10 +4,10 @@ from datetime import datetime
 class TwitterClient:
     def __init__(self):
         twitter_auth_keys = {
-            "consumer_key"        : "",
-            "consumer_secret"     : "",
-            "access_token"        : "",
-            "access_token_secret" : ""
+            "consumer_key"        : "gdyrRvbHejSwozbsqp3MQdEGA",
+            "consumer_secret"     : "MVdGaXmvkeM6WpU4CSmR79Pcq3JIxdQYxISNNvQyO9ptN3hC7S",
+            "access_token"        : "1536717264346660865-6vT9SSckSyoeP4at9fIvvmFckbgw2j",
+            "access_token_secret" : "LRPQRtpkzyo6e4hLyIkHIPoQjItuAIImyVb45T8k6NkDf"
         }
     
         auth = tweepy.OAuthHandler(

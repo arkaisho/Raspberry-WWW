@@ -5,30 +5,39 @@ import time
 ##  echo 11
 
 class DistanceSensor:
-    def __init__(self,PIN_DISTANCE_TRIGGER,PIN_DISTANCE_ECHO):
+    def __init__(self,trigger_pin,echo_pin):
+        self.trigger_pin = trigger_pin
+        self.echo_pin = echo_pin
 
-        self.PIN_DISTANCE_TRIGGER = PIN_DISTANCE_TRIGGER
-        self.PIN_DISTANCE_ECHO = PIN_DISTANCE_ECHO
-
-        GPIO.setup(PIN_DISTANCE_TRIGGER, GPIO.OUT)
-        GPIO.setup(PIN_DISTANCE_ECHO, GPIO.IN)
-        GPIO.output(PIN_DISTANCE_TRIGGER, GPIO.LOW)
+        GPIO.setup(trigger_pin, GPIO.OUT)
+        GPIO.setup(echo_pin, GPIO.IN)
+        GPIO.output(trigger_pin, GPIO.LOW)
+        time.sleep(2)
         
     def readSensor(self):
-        GPIO.output(self.PIN_DISTANCE_TRIGGER, GPIO.HIGH)
-        time.sleep(0.00001)
-        GPIO.output(self.PIN_DISTANCE_TRIGGER, GPIO.LOW)
+        try:
+            GPIO.output(self.trigger_pin, GPIO.HIGH)
+            time.sleep(0.00001)
+            GPIO.output(self.trigger_pin, GPIO.LOW)
+            
+            while GPIO.input(self.echo_pin)==0:
+                pulse_start_time = time.time()
+            while GPIO.input(self.echo_pin)==1:
+                pulse_end_time = time.time()
 
-        while GPIO.input(self.PIN_DISTANCE_ECHO)==0:
-            pulse_start_time = time.time()
-        while GPIO.input(self.PIN_DISTANCE_ECHO)==1:
-            pulse_end_time = time.time()
-
-        pulse_duration = pulse_end_time - pulse_start_time
-        return round(pulse_duration * 17150, 2)
-    
+            pulse_duration = pulse_end_time - pulse_start_time
+            return round(pulse_duration * 17150, 2)
+        
+        except:
+            return False
 
     def readAndPost(self,client):
         distance = self.readSensor()
-        client.publish("arkaisho_iot_project_proximity",distance)
-        print("posted distance:",str(distance))
+        
+        if(not (type(distance) == bool)):
+            client.publish("arkaisho_iot_project_proximity",distance)
+            print("posted distance:",str(distance))
+        else:
+            client.publish("arkaisho_iot_project_proximity_failure",0)
+            print("posted distance failure")
+            

@@ -21,14 +21,14 @@ class BrokerClient:
         
     def publish(self,topic,data):
         self.client.publish(topic,data)
-        
+    
     def subscribe(self,topic):
         self.client.subscribe(topic)
         
     def setCallback(self):
         def on_message(client,userdata,msg):
             twitterCLient = TwitterClient()
-            print("received "+str(json.loads(msg.payload.decode()))+" on topic"+ msg.topic)
+            print("received "+str(json.loads(msg.payload.decode()))+" on topic "+ msg.topic)
             if (msg.topic == "arkaisho_iot_project_temperature_processed"):
                 twitterCLient.post("The temperature now is "+str(json.loads(msg.payload.decode()))+" ºC")
                 print("posted temperature on twitter")
